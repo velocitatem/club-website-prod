@@ -42,3 +42,9 @@ jobs:
         git add .
         git commit -m "Cloned IERoboticsClub/club-website into prod"
         git push origin prod
+
+    # force push to main | at the end main and prod should be the same
+    - name:
+      run: |
+        git checkout main
+        git push origin main -f
