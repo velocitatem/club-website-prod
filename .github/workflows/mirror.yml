@@ -1,0 +1,32 @@
+name: Clone IERoboticsClub/club-website into prod branch
+
+on:
+  push:
+    branches:
+      - main  # or the branch where you want this action to run
+
+jobs:
+  clone-repo:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout current repo
+      uses: actions/checkout@v2
+      with:
+        ref: prod
+
+    - name: Delete existing files
+      run: |
+        rm -rf *
+        git rm -rf *
+
+    - name: Clone IERoboticsClub/club-website
+      run: git clone https://github.com/IERoboticsClub/club-website .
+
+    - name: Commit and Push
+      run: |
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+        git add .
+        git commit -m "Cloned IERoboticsClub/club-website into prod"
+        git push origin prod
