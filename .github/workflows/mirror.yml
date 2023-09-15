@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main  # or the branch where you want this action to run
+permissions:
+  contents: write  # Grants write access to the repository content
 
 jobs:
   clone-repo:
