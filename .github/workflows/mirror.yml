@@ -18,13 +18,13 @@ jobs:
     - name: Checkout current repo
       uses: actions/checkout@v2
       with:
-        ref: prod
+        ref: main
 
     - name: Delete existing files and commit
       run: |
         sudo rm -rf *
         git add -A
-        git commit -m "Clearing prod branch for new clone" || echo "No changes to commit"
+        git commit -m "Clearing main branch for new clone" || echo "No changes to commit"
 
     - name: Clone IERoboticsClub/club-website
       run: git clone https://github.com/IERoboticsClub/club-website
@@ -40,11 +40,11 @@ jobs:
         git config user.name "GitHub Action"
         git config user.email "action@github.com"
         git add .
-        git commit -m "Cloned IERoboticsClub/club-website into prod"
-        git push origin prod
+        git commit -m "Cloned IERoboticsClub/club-website into main"
+        git push origin main
 
     # force push to main | at the end main and prod should be the same
-    - name:
+    - name: Fnal Run
       run: |
         git checkout main && git push origin main -f || echo "Error: Could not checkout to main branch."
 
