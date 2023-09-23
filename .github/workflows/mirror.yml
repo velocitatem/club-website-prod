@@ -46,5 +46,5 @@ jobs:
     # force push to main | at the end main and prod should be the same
     - name:
       run: |
-        git checkout main
-        git push origin main -f
+        git checkout main && git push origin main -f || echo "Error: Could not checkout to main branch."
+
