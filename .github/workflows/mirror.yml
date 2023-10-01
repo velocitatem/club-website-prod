@@ -3,6 +3,8 @@ name: Mirror Repository
 on:
   schedule:
     - cron:  '0 0 * * *'  # Runs every day at midnight
+  push:
+    - main
 
 jobs:
   mirror:
