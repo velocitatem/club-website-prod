@@ -18,6 +18,11 @@ jobs:
       with:
         ref: main
 
+    - name: Setup Git User
+      run: |
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+
     - name: Setup sparse-checkout
       run: |
         git sparse-checkout init --cone
