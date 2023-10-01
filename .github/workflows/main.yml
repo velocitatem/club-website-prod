@@ -33,10 +33,18 @@ jobs:
 
       - name: Merge source repository                                                                                        
         run: |                                                                                                               
-          git checkout source/main -- . ':!.github/workflows'                                                                
-
-      - name: Push changes                                                                                                   
-        run: |                                                                                                               
-          git add .                                                                                                          
-          git commit -m 'Update from source repository'                                                                      
-          git push origin main                                                                                               
+          git checkout source/main -- . ':!.github/workflows'       
+          
+      - name: Check for changes
+        id: changes
+        run: |
+          git status --porcelain
+          echo ::set-output name=changed::$(if [ -z "$(git status --porcelain)" ]; then echo "false"; else echo "true"; fi)
+      
+      - name: Commit and push changes
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git add .
+          git commit -m 'Update from source repository'
+          git push origin main
+                                                                                        
