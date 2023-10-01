@@ -18,9 +18,7 @@ jobs:
     - name: Delete existing files and commit
       run: |
         sudo rm -rf *
-        git add -A
-        git commit -m "Clearing main branch for new clone" || echo "No changes to commit"
-
+        
     - name: Checkout current repo
       uses: actions/checkout@v2
       with:
