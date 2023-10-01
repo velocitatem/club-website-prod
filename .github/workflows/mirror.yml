@@ -4,6 +4,9 @@ on:
   schedule:
     - cron:  '0 0 * * *'  # Runs every day at midnight
   push:
+
+permissions:
+  contents: write  # Grants write access to the repository content
 jobs:
   mirror:
     runs-on: ubuntu-latest
