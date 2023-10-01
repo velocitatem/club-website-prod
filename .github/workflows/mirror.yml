@@ -4,8 +4,6 @@ on:
   schedule:
     - cron:  '0 0 * * *'  # Runs every day at midnight
   push:
-    - main
-
 jobs:
   mirror:
     runs-on: ubuntu-latest
