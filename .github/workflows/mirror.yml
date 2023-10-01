@@ -1,49 +1,22 @@
-name: Clone IERoboticsClub/club-website into prod branch
+name: Mirror Repository
 
 on:
-  push:
-    branches:
-      - main  # or the branch where you want this action to run
-  # run every night
   schedule:
-    - cron: '0 0 * * *'
-permissions:
-  contents: write  # Grants write access to the repository content
+    - cron:  '0 0 * * *'  # Runs every day at midnight
 
 jobs:
-  clone-repo:
+  mirror:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Delete existing files and commit
-      run: |
-        sudo rm -rf *
-        
     - name: Checkout current repo
       uses: actions/checkout@v2
       with:
         ref: main
 
-
-    - name: Clone IERoboticsClub/club-website
-      run: git clone https://github.com/IERoboticsClub/club-website
-
-    - name: Copy files
+    - name: Mirror repository
       run: |
-        sudo cp -r club-website/* .
-        sudo rm -rf club-website
-
-
-    - name: Commit and Push
-      run: |
-        git config user.name "GitHub Action"
-        git config user.email "action@github.com"
-        git add .
-        git diff --exit-code && echo "No changes to commit" || git commit -m "Cloned IERoboticsClub/club-website into main"
-        git push origin main
-
-    # force push to main | at the end main and prod should be the same
-    - name: Fnal Run
-      run: |
-        git checkout main && git push origin main -f || echo "Error: Could not checkout to main branch."
-
+        git remote add source https://github.com/IERoboticsClub/club-website.git
+        git fetch source
+        git reset --hard source/main
+        git push origin main --force  # Force push to the 'main' branch
