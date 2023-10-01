@@ -15,16 +15,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout current repo
-      uses: actions/checkout@v2
-      with:
-        ref: main
-
     - name: Delete existing files and commit
       run: |
         sudo rm -rf *
         git add -A
         git commit -m "Clearing main branch for new clone" || echo "No changes to commit"
+
+    - name: Checkout current repo
+      uses: actions/checkout@v2
+      with:
+        ref: main
+
 
     - name: Clone IERoboticsClub/club-website
       run: git clone https://github.com/IERoboticsClub/club-website
