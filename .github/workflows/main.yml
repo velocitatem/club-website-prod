@@ -29,11 +29,11 @@ jobs:
 
       - name: Fetch source repository                                                                                        
         run: |                                                                                                               
-          git fetch source                                                                                                   
+          git fetch source prod                                                                                                   
 
       - name: Merge source repository                                                                                        
         run: |                                                                                                               
-          git checkout source/main -- . ':!.github/workflows'       
+          git checkout source/prod -- . ':!.github/workflows'       
           
       - name: Check for changes
         id: changes
